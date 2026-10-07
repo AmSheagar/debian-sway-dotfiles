@@ -1,0 +1,12 @@
+# Editor / IDE
+.vscode/
+.idea/
+
+# OS / desktop
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.swp
+*~
