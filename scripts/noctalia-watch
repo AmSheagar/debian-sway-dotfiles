@@ -1,0 +1,8 @@
+#!/bin/sh
+
+while true; do
+    if ! pgrep -x noctalia >/dev/null; then
+        /usr/bin/noctalia --daemon
+    fi
+    sleep 3
+done

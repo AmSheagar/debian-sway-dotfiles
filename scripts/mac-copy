@@ -1,0 +1,9 @@
+#!/bin/sh
+
+app=$(swaymsg -t get_tree | jq -r '.. | objects | select(.focused? == true) | .app_id // empty')
+
+if [ "$app" = "kitty" ]; then
+    wtype -M ctrl -M shift -k c -m shift -m ctrl
+else
+    wtype -M ctrl -k c -m ctrl
+fi
