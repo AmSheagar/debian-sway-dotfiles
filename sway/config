@@ -72,7 +72,6 @@ include /etc/sway/config-vars.d/*
     bindsym $mod+Shift+q kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -219,7 +218,7 @@ bindsym $mod+r mode "resize"
 
 input type:keyboard {
     xkb_layout latam
-    xkb_options altwin:swap_alt_win
+    xkb_options altwin:swap_lalt_lwin,lv3:ralt_switch
 }
 
 # Monitores
@@ -328,11 +327,11 @@ bindsym $mod+Shift+r reload
 # Salir de Sway
 bindsym $mod+Shift+q exec swaymsg exit
 
-# Cambiar foco
-bindsym $mod+Left focus left
-bindsym $mod+Right focus right
-bindsym $mod+Up focus up
-bindsym $mod+Down focus down
+# Cambiar foco con Option (Alt_L) + flechas
+bindsym Mod1+Left focus left
+bindsym Mod1+Right focus right
+bindsym Mod1+Up focus up
+bindsym Mod1+Down focus down
 
 # Mover ventanas
 bindsym $mod+Shift+Left move left
@@ -375,5 +374,63 @@ client.unfocused        #313244    #181825         #f38ba8
 client.focused_inactive #45475a    #181825         #f38ba8
 client.urgent            #f38ba8    #181825         #f38ba8
 
+#Aplicaciones de inicio al arrancar
 exec_always autotiling
+exec systemctl --user start sunshine.service
 
+include ~/.config/sway/noctalia
+
+# Navegacion de escritorios estilo macOS
+unbindsym $mod+1
+unbindsym $mod+2
+unbindsym $mod+3
+unbindsym $mod+4
+unbindsym $mod+5
+unbindsym $mod+6
+unbindsym $mod+7
+unbindsym $mod+8
+unbindsym $mod+9
+unbindsym $mod+0
+
+# Command + Control + flechas para cambiar de escritorio
+bindsym $mod+Ctrl+Left workspace prev
+bindsym $mod+Ctrl+Right workspace next
+
+# ==========================================
+# Escritorios permanentes en dos monitores
+# ==========================================
+
+# Monitor 1: DP-1
+workspace 1 output DP-1
+workspace 3 output DP-1
+
+# Monitor 2: DP-2
+workspace 2 output DP-2
+workspace 4 output DP-2
+
+# Navegacion entre escritorios del monitor activo
+unbindsym $mod+Ctrl+Left
+unbindsym $mod+Ctrl+Right
+bindsym $mod+Ctrl+Left workspace prev
+bindsym $mod+Ctrl+Right workspace next
+
+# Navegacion de escritorios estilo macOS
+unbindsym $mod+Ctrl+Left
+unbindsym $mod+Ctrl+Right
+
+bindsym $mod+Ctrl+Left exec ~/.config/sway/scripts/workspace-nav.sh left
+bindsym $mod+Ctrl+Right exec ~/.config/sway/scripts/workspace-nav.sh right
+
+#Ventanas Flotantes
+
+# VLC siempre flotante
+for_window [app_id="(?i).*vlc.*"] floating enable
+for_window [class="(?i).*vlc.*"] floating enable
+for_window [title="(?i).*vlc.*"] floating enable
+
+# mpv siempre flotante
+for_window [app_id="mpv"] floating enable
+for_window [class="mpv"] floating enable
+
+# Ventana de Sunshine siempre flotante
+for_window [title="(?i).*sunshine.*"] floating enable, resize set 760 500, move position 58 ppt 2 ppt

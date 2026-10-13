@@ -68,6 +68,7 @@ echo
 echo "==> Creando directorios..."
 
 mkdir -p "$HOME/.config/sway"
+mkdir -p "$HOME/.config/sway/scripts"
 mkdir -p "$HOME/.config/kitty"
 mkdir -p "$HOME/.local/bin"
 
@@ -91,6 +92,22 @@ backup_file \
 
 cp "$REPO_DIR/sway/config" "$HOME/.config/sway/config"
 echo "[✓] Sway"
+
+backup_file \
+    "$REPO_DIR/sway/noctalia" \
+    "$HOME/.config/sway/noctalia"
+
+cp "$REPO_DIR/sway/noctalia" "$HOME/.config/sway/noctalia"
+echo "[✓] Noctalia Sway config"
+
+backup_file \
+    "$REPO_DIR/sway/scripts/workspace-nav.sh" \
+    "$HOME/.config/sway/scripts/workspace-nav.sh"
+
+cp "$REPO_DIR/sway/scripts/workspace-nav.sh" "$HOME/.config/sway/scripts/workspace-nav.sh"
+chmod +x "$HOME/.config/sway/scripts/workspace-nav.sh"
+echo "[✓] Sway workspace navigation"
+
 
 backup_file \
     "$REPO_DIR/kitty/kitty.conf" \

@@ -9,6 +9,8 @@ This repository is designed as a starting point for people who want a clean Sway
 ## Features
 
 - Sway window manager configuration
+- Custom navigation between workspaces across two monitors
+- Floating-window rules for VLC, mpv, and the Sunshine web panel
 - Kitty terminal configuration
 - Zsh as the default shell
 - macOS-style keyboard shortcuts
@@ -52,6 +54,8 @@ Kitty's native `Ctrl+Shift+C` and `Ctrl+Shift+V` shortcuts remain available.
 | `⌘A` | `Ctrl+A` |
 | `⌘F` | `Ctrl+F` |
 | `⌘N` | `Ctrl+N` |
+| `⌥ + arrow keys` | Change the focused window |
+| `⌘ + Ctrl + ← / →` | Switch workspaces using the custom script |
 
 ## Requirements
 
@@ -98,14 +102,14 @@ The installer:
 1. Checks whether the required commands are available.
 2. Installs missing Debian packages when possible.
 3. Creates the required configuration directories.
-4. Backs up existing Sway and Kitty configurations.
-5. Installs the repository configuration files.
-6. Installs the helper scripts.
+4. Backs up existing Sway, Noctalia, workspace-navigation, and Kitty files.
+5. Installs the Sway, Noctalia, and Kitty configurations.
+6. Installs the helper scripts and workspace-navigation script.
 7. Preserves executable permissions on the scripts.
 
 ### Backups
 
-If an existing Sway or Kitty configuration is found, the installer creates a backup under:
+If existing Sway, Noctalia, workspace-navigation, or Kitty files are found, the installer creates a backup under:
 
 ```text
 ~/.config-backup/
@@ -144,7 +148,10 @@ debian-sway-dotfiles/
 │   ├── mac-paste
 │   └── noctalia-watch
 └── sway/
-    └── config
+    ├── config
+    ├── noctalia
+    └── scripts/
+        └── workspace-nav.sh
 ```
 
 ## Scripts
@@ -184,6 +191,10 @@ Ctrl+V
 ### `noctalia-watch`
 
 Keeps the Noctalia daemon running while the Sway session is active.
+
+### `workspace-nav.sh`
+
+Custom helper invoked by Sway to navigate between workspaces.
 
 ## Customization
 
